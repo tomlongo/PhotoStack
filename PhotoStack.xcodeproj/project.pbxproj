@@ -1,0 +1,355 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C16699C15DD2FA3007DBB17 /* PhotoStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C16699B15DD2FA3007DBB17 /* PhotoStackView.m */; };
+		6C1669A315DD378A007DBB17 /* PhotoStackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1669A215DD3789007DBB17 /* PhotoStackViewController.m */; };
+		6C1669AE15DDE5A2007DBB17 /* PhotoBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669AC15DDE5A2007DBB17 /* PhotoBorder.png */; };
+		6C1669AF15DDE5A2007DBB17 /* PhotoBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669AD15DDE5A2007DBB17 /* PhotoBorder@2x.png */; };
+		6C1669C615DF2868007DBB17 /* photo1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669C015DF2868007DBB17 /* photo1.jpg */; };
+		6C1669C715DF2868007DBB17 /* photo2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669C115DF2868007DBB17 /* photo2.jpg */; };
+		6C1669C815DF2868007DBB17 /* photo3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669C215DF2868007DBB17 /* photo3.jpg */; };
+		6C1669C915DF2868007DBB17 /* photo4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669C315DF2868007DBB17 /* photo4.jpg */; };
+		6C1669CA15DF2868007DBB17 /* photo5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669C415DF2868007DBB17 /* photo5.jpg */; };
+		6C1669CB15DF2868007DBB17 /* photo6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1669C515DF2868007DBB17 /* photo6.jpg */; };
+		6CDE17AA15DCB31F00A109F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDE17A915DCB31F00A109F5 /* UIKit.framework */; };
+		6CDE17AC15DCB31F00A109F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDE17AB15DCB31F00A109F5 /* Foundation.framework */; };
+		6CDE17AE15DCB31F00A109F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDE17AD15DCB31F00A109F5 /* CoreGraphics.framework */; };
+		6CDE17B415DCB31F00A109F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6CDE17B215DCB31F00A109F5 /* InfoPlist.strings */; };
+		6CDE17B615DCB31F00A109F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE17B515DCB31F00A109F5 /* main.m */; };
+		6CDE17BA15DCB31F00A109F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE17B915DCB31F00A109F5 /* AppDelegate.m */; };
+		6CDE17BD15DCB31F00A109F5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDE17BB15DCB31F00A109F5 /* MainStoryboard.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6C16699A15DD2FA3007DBB17 /* PhotoStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoStackView.h; sourceTree = "<group>"; };
+		6C16699B15DD2FA3007DBB17 /* PhotoStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoStackView.m; sourceTree = "<group>"; };
+		6C1669A115DD3789007DBB17 /* PhotoStackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoStackViewController.h; sourceTree = "<group>"; };
+		6C1669A215DD3789007DBB17 /* PhotoStackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoStackViewController.m; sourceTree = "<group>"; };
+		6C1669AC15DDE5A2007DBB17 /* PhotoBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoBorder.png; sourceTree = "<group>"; };
+		6C1669AD15DDE5A2007DBB17 /* PhotoBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoBorder@2x.png"; sourceTree = "<group>"; };
+		6C1669C015DF2868007DBB17 /* photo1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo1.jpg; sourceTree = "<group>"; };
+		6C1669C115DF2868007DBB17 /* photo2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo2.jpg; sourceTree = "<group>"; };
+		6C1669C215DF2868007DBB17 /* photo3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo3.jpg; sourceTree = "<group>"; };
+		6C1669C315DF2868007DBB17 /* photo4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo4.jpg; sourceTree = "<group>"; };
+		6C1669C415DF2868007DBB17 /* photo5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo5.jpg; sourceTree = "<group>"; };
+		6C1669C515DF2868007DBB17 /* photo6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo6.jpg; sourceTree = "<group>"; };
+		6CDE17A515DCB31F00A109F5 /* PhotoStack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoStack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CDE17A915DCB31F00A109F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6CDE17AB15DCB31F00A109F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6CDE17AD15DCB31F00A109F5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6CDE17B115DCB31F00A109F5 /* PhotoStack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoStack-Info.plist"; sourceTree = "<group>"; };
+		6CDE17B315DCB31F00A109F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6CDE17B515DCB31F00A109F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6CDE17B715DCB31F00A109F5 /* PhotoStack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoStack-Prefix.pch"; sourceTree = "<group>"; };
+		6CDE17B815DCB31F00A109F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6CDE17B915DCB31F00A109F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6CDE17BC15DCB31F00A109F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6CDE17A215DCB31F00A109F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CDE17AA15DCB31F00A109F5 /* UIKit.framework in Frameworks */,
+				6CDE17AC15DCB31F00A109F5 /* Foundation.framework in Frameworks */,
+				6CDE17AE15DCB31F00A109F5 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6C16696315DCEDF1007DBB17 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				6C1669C015DF2868007DBB17 /* photo1.jpg */,
+				6C1669C115DF2868007DBB17 /* photo2.jpg */,
+				6C1669C215DF2868007DBB17 /* photo3.jpg */,
+				6C1669C315DF2868007DBB17 /* photo4.jpg */,
+				6C1669C415DF2868007DBB17 /* photo5.jpg */,
+				6C1669C515DF2868007DBB17 /* photo6.jpg */,
+			);
+			name = Photos;
+			sourceTree = "<group>";
+		};
+		6CDE179A15DCB31F00A109F5 = {
+			isa = PBXGroup;
+			children = (
+				6CDE17AF15DCB31F00A109F5 /* PhotoStack */,
+				6CDE17A815DCB31F00A109F5 /* Frameworks */,
+				6CDE17A615DCB31F00A109F5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6CDE17A615DCB31F00A109F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CDE17A515DCB31F00A109F5 /* PhotoStack.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CDE17A815DCB31F00A109F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6CDE17A915DCB31F00A109F5 /* UIKit.framework */,
+				6CDE17AB15DCB31F00A109F5 /* Foundation.framework */,
+				6CDE17AD15DCB31F00A109F5 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CDE17AF15DCB31F00A109F5 /* PhotoStack */ = {
+			isa = PBXGroup;
+			children = (
+				6CEDEC8E15DFBD46005CC8AF /* Demo */,
+				6CDE17CE15DCB37D00A109F5 /* PhotoStack */,
+				6CDE17B015DCB31F00A109F5 /* Supporting Files */,
+			);
+			name = PhotoStack;
+			path = Deck;
+			sourceTree = "<group>";
+		};
+		6CDE17B015DCB31F00A109F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6CDE17B115DCB31F00A109F5 /* PhotoStack-Info.plist */,
+				6CDE17B215DCB31F00A109F5 /* InfoPlist.strings */,
+				6CDE17B515DCB31F00A109F5 /* main.m */,
+				6CDE17B715DCB31F00A109F5 /* PhotoStack-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6CDE17CE15DCB37D00A109F5 /* PhotoStack */ = {
+			isa = PBXGroup;
+			children = (
+				6C1669AC15DDE5A2007DBB17 /* PhotoBorder.png */,
+				6C1669AD15DDE5A2007DBB17 /* PhotoBorder@2x.png */,
+				6C16699A15DD2FA3007DBB17 /* PhotoStackView.h */,
+				6C16699B15DD2FA3007DBB17 /* PhotoStackView.m */,
+			);
+			name = PhotoStack;
+			sourceTree = "<group>";
+		};
+		6CEDEC8E15DFBD46005CC8AF /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				6C16696315DCEDF1007DBB17 /* Photos */,
+				6CDE17B815DCB31F00A109F5 /* AppDelegate.h */,
+				6CDE17B915DCB31F00A109F5 /* AppDelegate.m */,
+				6CDE17BB15DCB31F00A109F5 /* MainStoryboard.storyboard */,
+				6C1669A115DD3789007DBB17 /* PhotoStackViewController.h */,
+				6C1669A215DD3789007DBB17 /* PhotoStackViewController.m */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6CDE17A415DCB31F00A109F5 /* PhotoStack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CDE17C315DCB31F00A109F5 /* Build configuration list for PBXNativeTarget "PhotoStack" */;
+			buildPhases = (
+				6CDE17A115DCB31F00A109F5 /* Sources */,
+				6CDE17A215DCB31F00A109F5 /* Frameworks */,
+				6CDE17A315DCB31F00A109F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhotoStack;
+			productName = Deck;
+			productReference = 6CDE17A515DCB31F00A109F5 /* PhotoStack.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6CDE179C15DCB31F00A109F5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = PhotoStack;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Tom Longo";
+			};
+			buildConfigurationList = 6CDE179F15DCB31F00A109F5 /* Build configuration list for PBXProject "PhotoStack" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6CDE179A15DCB31F00A109F5;
+			productRefGroup = 6CDE17A615DCB31F00A109F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6CDE17A415DCB31F00A109F5 /* PhotoStack */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6CDE17A315DCB31F00A109F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CDE17B415DCB31F00A109F5 /* InfoPlist.strings in Resources */,
+				6CDE17BD15DCB31F00A109F5 /* MainStoryboard.storyboard in Resources */,
+				6C1669AE15DDE5A2007DBB17 /* PhotoBorder.png in Resources */,
+				6C1669AF15DDE5A2007DBB17 /* PhotoBorder@2x.png in Resources */,
+				6C1669C615DF2868007DBB17 /* photo1.jpg in Resources */,
+				6C1669C715DF2868007DBB17 /* photo2.jpg in Resources */,
+				6C1669C815DF2868007DBB17 /* photo3.jpg in Resources */,
+				6C1669C915DF2868007DBB17 /* photo4.jpg in Resources */,
+				6C1669CA15DF2868007DBB17 /* photo5.jpg in Resources */,
+				6C1669CB15DF2868007DBB17 /* photo6.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6CDE17A115DCB31F00A109F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CDE17B615DCB31F00A109F5 /* main.m in Sources */,
+				6CDE17BA15DCB31F00A109F5 /* AppDelegate.m in Sources */,
+				6C16699C15DD2FA3007DBB17 /* PhotoStackView.m in Sources */,
+				6C1669A315DD378A007DBB17 /* PhotoStackViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6CDE17B215DCB31F00A109F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CDE17B315DCB31F00A109F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6CDE17BB15DCB31F00A109F5 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CDE17BC15DCB31F00A109F5 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6CDE17C115DCB31F00A109F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6CDE17C215DCB31F00A109F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6CDE17C415DCB31F00A109F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Deck/PhotoStack-Prefix.pch";
+				INFOPLIST_FILE = "Deck/PhotoStack-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = PhotoStack;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6CDE17C515DCB31F00A109F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Deck/PhotoStack-Prefix.pch";
+				INFOPLIST_FILE = "Deck/PhotoStack-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = PhotoStack;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CDE179F15DCB31F00A109F5 /* Build configuration list for PBXProject "PhotoStack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CDE17C115DCB31F00A109F5 /* Debug */,
+				6CDE17C215DCB31F00A109F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6CDE17C315DCB31F00A109F5 /* Build configuration list for PBXNativeTarget "PhotoStack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CDE17C415DCB31F00A109F5 /* Debug */,
+				6CDE17C515DCB31F00A109F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6CDE179C15DCB31F00A109F5 /* Project object */;
+}
