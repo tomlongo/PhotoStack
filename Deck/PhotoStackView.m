@@ -399,7 +399,8 @@
             
         }
         
-        self.photoViews = photoViewsMutable; // Photo views are added to subview in the photoView setter
+        // Photo views are added to subview in the photoView setter
+        self.photoViews = photoViewsMutable; photoViewsMutable = nil;
         [self goToPhotoAtIndex:topPhotoIndex];
         
     }
@@ -443,5 +444,11 @@
     return self;
 }
 
+-(void)dealloc {
+    [self setPhotoViews:nil];
+    [self setBorderImage:nil];
+    [self setHighlightColor:nil];
+    [self setContentView:nil];
+}
 
 @end

@@ -9,11 +9,15 @@ PhotoStack is my attempt to re-create this user interface.
 * iOS 5+
 * ARC Enabled
 
+## Demo
+
+I've uploaded a [YouTube video demonstrating the provided demo project here. ](http://www.youtube.com/watch?v=wmpg6nIV3ns).
+
 ## Installation
 
-First, download the source (including example Xcode project) from here, then include PhotoStackView.h, PhotoStackView.m and PhotoBorder.png files into your project.
+First, download the source (including example Xcode project), then include PhotoStackView.h, PhotoStackView.m and PhotoBorder.png files into your project. Include PhotoStackView.h and you're ready to go!
 
-Include PhotoStackView.h and you're ready to go! To create a PhotoStack object, first initialise it as you would with a normal view:
+To create a PhotoStack object, first initialise it as you would with a normal view:
 
 ``` 
 PhotoStackView *photoStack = [[PhotoStackView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
