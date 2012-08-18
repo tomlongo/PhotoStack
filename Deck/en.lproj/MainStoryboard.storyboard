@@ -51,6 +51,7 @@
         <class className="PhotoStackViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoStackViewController.h"/>
             <relationships>
+                <relationship kind="action" name="tappedInsertAnotherPhoto:"/>
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
             </relationships>
         </class>
