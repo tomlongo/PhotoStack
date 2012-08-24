@@ -173,13 +173,8 @@
 -(void)returnToCenter:(UIView *)photo {
     
     [UIView animateWithDuration:0.2
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          photo.center = CGPointMake(self.contentView.center.x, self.contentView.center.y);
-                     }
-                     completion:^(BOOL finished){
-                         //Card did return to centre
                      }];
 }
 
@@ -192,8 +187,6 @@
     float xPos = (velocity.x < 0) ? self.contentView.center.x-self.contentView.frame.size.width : self.contentView.center.y+self.contentView.frame.size.width;
     
     [UIView animateWithDuration:0.1
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          photo.center = CGPointMake(xPos, self.contentView.center.y);
                      }
@@ -220,13 +213,8 @@
     if(animated) {
         
         [UIView animateWithDuration:0.2
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveEaseInOut
                          animations:^{
                              photo.transform = transform;
-                         }
-                         completion:^(BOOL finished){
-                             //done
                          }];
         
     } else {
@@ -240,7 +228,7 @@
     int min = -(self.rotationOffset);
     int max = self.rotationOffset;  
     
-    int degrees = (arc4random() % (max-min+1)) + min;
+    int degrees = (arc4random_uniform(max-min+1)) + min;
     [self rotatePhoto:photo degrees:degrees animated:animated];
     
 }
