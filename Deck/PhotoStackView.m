@@ -364,6 +364,7 @@
 
             UIImageView *photoImageView     = [[UIImageView alloc] initWithImage:[self.dataSource photoStackView:self photoForIndex:index]];
             UIView *view                    = [[UIView alloc] initWithFrame:photoImageView.frame];
+            view.layer.rasterizationScale   = [[UIScreen mainScreen] scale];            
             view.layer.shouldRasterize      = YES; // rasterize the view for faster drawing and smooth edges
 
             if (self.showBorder) {
@@ -386,8 +387,7 @@
                     view.layer.borderWidth        = self.borderWidth;
                     view.layer.borderColor        = [[UIColor whiteColor] CGColor];
                     view.layer.shadowOffset       = CGSizeMake(0, 0);
-                    view.layer.shadowOpacity      = 1;
-                    view.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+                    view.layer.shadowOpacity      = 0.5;
                 }
             }
 
