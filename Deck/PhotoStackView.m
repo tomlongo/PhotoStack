@@ -181,8 +181,14 @@
 
 -(void)flickAway:(UIView *)photo withVelocity:(CGPoint)velocity {
     
-    if ([self.delegate respondsToSelector:@selector(photoStackView:willFlickAwayPhotoAtIndex:)]) {
-        [self.delegate photoStackView:self willFlickAwayPhotoAtIndex:[self indexOfTopPhoto]];
+    if ([self.delegate respondsToSelector:@selector(photoStackView:willFlickAwayPhotoFromIndex:toIndex:)]) {
+        NSUInteger fromIndex = [self indexOfTopPhoto];
+        NSUInteger toIndex = [self indexOfTopPhoto]+1;
+        NSUInteger numberOfPhotos = [self.dataSource numberOfPhotosInPhotoStackView:self];
+        if (toIndex >= numberOfPhotos) {
+            toIndex = 0;
+        }
+        [self.delegate photoStackView:self willFlickAwayPhotoFromIndex:fromIndex toIndex:toIndex];
     }
     
     float xPos = (velocity.x < 0) ? self.contentView.center.x-self.contentView.frame.size.width : self.contentView.center.y+self.contentView.frame.size.width;
