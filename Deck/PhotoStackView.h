@@ -55,6 +55,7 @@
     @property (nonatomic, strong) UIColor *highlightColor;
 
     -(void)goToPhotoAtIndex:(NSUInteger)index;
+    -(void)flipToNextImage;
     -(void)reloadData;
 
 @end

@@ -313,6 +313,15 @@
 #pragma mark -
 #pragma mark Other Methods
 
+-(void)flipToNextImage{
+    if ([self.delegate respondsToSelector:@selector(photoStackView:willFlickAwayPhotoAtIndex:)]) {
+        [self.delegate photoStackView:self willFlickAwayPhotoAtIndex:[self indexOfTopPhoto]];
+    }
+
+    UIView *topPhoto = [self topPhoto];
+    [self flickAway:topPhoto withVelocity:CGPointMake(400, 0)];
+}
+
 -(void)goToPhotoAtIndex:(NSUInteger)index {
     for (UIView *view in self.photoViews) {
         if([self.photoViews indexOfObject:view] < index) {
