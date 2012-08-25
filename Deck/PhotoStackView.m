@@ -6,6 +6,7 @@
 //  - GitHub:  github.com/tomlongo
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "PhotoStackView.h"
 
 #define degreesToRadians(x) (M_PI * x / 180.0)
@@ -209,14 +210,14 @@
     float radians = degreesToRadians(degrees);
     
     CGAffineTransform transform = CGAffineTransformMakeRotation(radians);
-    
+
     if(animated) {
-        
+
         [UIView animateWithDuration:0.2
                          animations:^{
                              photo.transform = transform;
                          }];
-        
+
     } else {
         photo.transform = transform;
     }
@@ -359,23 +360,31 @@
 
             UIImageView *photoImageView     = [[UIImageView alloc] initWithImage:[self.dataSource photoStackView:self photoForIndex:index]];
             UIView *view                    = [[UIView alloc] initWithFrame:photoImageView.frame];
-            
-            if(self.showBorder) {
-                
-                // If there is a border, we need to add a background image view, and add some padding around the photo for the border
-                
-                CGRect photoFrame                = photoImageView.frame;
-                photoFrame.origin                = CGPointMake(self.borderWidth, self.borderWidth);
-                photoImageView.frame             = photoFrame;
+            view.layer.shouldRasterize      = YES; // rasterize the view for faster drawing and smooth edges
+
+            if (self.showBorder) {
                 
                 // Add the background image
-                
-                view.frame                       = CGRectMake(0, 0, photoImageView.frame.size.width+(self.borderWidth*2), photoImageView.frame.size.height+(self.borderWidth*2));
-                UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:view.frame];
-                backgroundImageView.image        = borderImage;
-                
-                [view addSubview:backgroundImageView];
-                
+                if (borderImage) {
+                    // If there is a border image, we need to add a background image view, and add some padding around the photo for the border
+
+                    CGRect photoFrame                = photoImageView.frame;
+                    photoFrame.origin                = CGPointMake(self.borderWidth, self.borderWidth);
+                    photoImageView.frame             = photoFrame;
+
+                    view.frame                       = CGRectMake(0, 0, photoImageView.frame.size.width+(self.borderWidth*2), photoImageView.frame.size.height+(self.borderWidth*2));
+                    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:view.frame];
+                    backgroundImageView.image        = borderImage;
+                    
+                    [view addSubview:backgroundImageView];
+                } else {
+                    // if there is no boarder image draw one with the CALayer
+                    view.layer.borderWidth        = self.borderWidth;
+                    view.layer.borderColor        = [[UIColor whiteColor] CGColor];
+                    view.layer.shadowOffset       = CGSizeMake(0, 0);
+                    view.layer.shadowOpacity      = 1;
+                    view.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+                }
             }
 
             [view addSubview:photoImageView];
