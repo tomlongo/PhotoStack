@@ -54,6 +54,7 @@
     // (default is black at 0.15 alpha)
     @property (nonatomic, strong) UIColor *highlightColor;
 
+    -(NSUInteger)indexOfTopPhoto;
     -(void)goToPhotoAtIndex:(NSUInteger)index;
     -(void)flipToNextImage;
     -(void)reloadData;
