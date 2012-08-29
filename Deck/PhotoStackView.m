@@ -320,7 +320,7 @@
 #pragma mark Other Methods
 
 -(void)flipToNextPhoto{
-    [self flickAway:[self topPhoto] withVelocity:CGPointMake(400, 0)];
+    [self flickAway:[self topPhoto] withVelocity:CGPointMake(-400, 0)];
 }
 
 -(void)goToPhotoAtIndex:(NSUInteger)index {
