@@ -319,7 +319,7 @@
 #pragma mark -
 #pragma mark Other Methods
 
--(void)flipToNextImage{
+-(void)flipToNextPhoto{
     [self flickAway:[self topPhoto] withVelocity:CGPointMake(400, 0)];
 }
 

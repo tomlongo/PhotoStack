@@ -56,7 +56,7 @@
 
     -(NSUInteger)indexOfTopPhoto;
     -(void)goToPhotoAtIndex:(NSUInteger)index;
-    -(void)flipToNextImage;
+    -(void)flipToNextPhoto;
     -(void)reloadData;
 
 @end
