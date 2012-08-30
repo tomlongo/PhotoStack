@@ -9,10 +9,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PhotoStackView.h"
 
-#define degreesToRadians(x) (M_PI * x / 180.0)
-#define BorderVisibilityDefault YES
-#define BorderWidthDefault 5.0f
-#define PhotoRotationOffsetDefault 4.0f
+static BOOL const BorderVisibilityDefault = YES;
+static CGFloat const BorderWidthDefault = 5.0f;
+static CGFloat const PhotoRotationOffsetDefault = 4.0f;
 
 @interface PhotoStackView()
 
@@ -186,7 +185,7 @@
 
 -(void)rotatePhoto:(UIView *)photo degrees:(NSInteger)degrees animated:(BOOL)animated {
     
-    CGFloat radians = degreesToRadians(degrees);
+    CGFloat radians = M_PI * degrees / 180.0;
     
     CGAffineTransform transform = CGAffineTransformMakeRotation(radians);
 
