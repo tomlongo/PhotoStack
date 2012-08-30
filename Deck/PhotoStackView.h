@@ -45,11 +45,11 @@
     @property BOOL showBorder;
 
     // Inset width used for the border image (Default is 5.0)
-    @property float borderWidth;
+    @property CGFloat borderWidth;
 
     // How many degrees each photo in the stack could be rotated (Default is 4.0)
     // eg. 5.0 will randomly rotate each photo from -5 to +5 degrees
-    @property float rotationOffset;
+    @property CGFloat rotationOffset;
 
     // The overlay colour that appears when the user taps on a photo
     // (default is black at 0.15 alpha)

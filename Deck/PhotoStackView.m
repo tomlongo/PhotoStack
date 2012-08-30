@@ -25,7 +25,7 @@
     -(void)flickAway:(UIView *)photo withVelocity:(CGPoint)velocity;
     -(void)makeCrooked:(UIView *)photo animated:(BOOL)animated;
     -(void)makeStraight:(UIView *)photo animated:(BOOL)animated;
-    -(void)rotatePhoto:(UIView *)photo degrees:(int)degrees animated:(BOOL)animated;
+    -(void)rotatePhoto:(UIView *)photo degrees:(NSInteger)degrees animated:(BOOL)animated;
 
     @property (nonatomic, strong) UIView *contentView;
     @property (nonatomic, strong) NSArray *photoViews;
@@ -120,22 +120,22 @@
     }
 }
 
--(float)borderWidth {
+-(CGFloat)borderWidth {
     return (self.showBorder) ? _borderWidth : 0;
 }
 
--(void)setBorderWidth:(float)borderWidth {
+-(void)setBorderWidth:(CGFloat)borderWidth {
     if(borderWidth != _borderWidth) {
         _borderWidth = borderWidth;
         [self reloadData];
     }
 }
 
--(float)rotationOffset {
+-(CGFloat)rotationOffset {
     return _rotationOffset;
 }
 
--(void)setRotationOffset:(float)rotationOffset {
+-(void)setRotationOffset:(CGFloat)rotationOffset {
     if(rotationOffset != _rotationOffset) {
         _rotationOffset = rotationOffset;
         [self reloadData];
@@ -191,7 +191,7 @@
         [self.delegate photoStackView:self willFlickAwayPhotoFromIndex:fromIndex toIndex:toIndex];
     }
     
-    float xPos = (velocity.x < 0) ? self.contentView.center.x-self.contentView.frame.size.width : self.contentView.center.y+self.contentView.frame.size.width;
+    CGFloat xPos = (velocity.x < 0) ? self.contentView.center.x-self.contentView.frame.size.width : self.contentView.center.y+self.contentView.frame.size.width;
     
     [UIView animateWithDuration:0.1
                      animations:^{
@@ -211,9 +211,9 @@
     
 }
 
--(void)rotatePhoto:(UIView *)photo degrees:(int)degrees animated:(BOOL)animated {
+-(void)rotatePhoto:(UIView *)photo degrees:(NSInteger)degrees animated:(BOOL)animated {
     
-    float radians = degreesToRadians(degrees);
+    CGFloat radians = degreesToRadians(degrees);
     
     CGAffineTransform transform = CGAffineTransformMakeRotation(radians);
 
@@ -232,10 +232,10 @@
 
 -(void)makeCrooked:(UIView *)photo animated:(BOOL)animated {
     
-    int min = -(self.rotationOffset);
-    int max = self.rotationOffset;  
+    NSInteger min = -(self.rotationOffset);
+    NSInteger max = self.rotationOffset;
     
-    int degrees = (arc4random_uniform(max-min+1)) + min;
+    NSInteger degrees = (arc4random_uniform(max-min+1)) + min;
     [self rotatePhoto:photo degrees:degrees animated:animated];
     
 }
@@ -267,8 +267,8 @@
     
     if(gesture.state == UIGestureRecognizerStateChanged) {
         
-        float xPos = topPhoto.center.x + translation.x;
-        float yPos = topPhoto.center.y + translation.y;
+        CGFloat xPos = topPhoto.center.x + translation.x;
+        CGFloat yPos = topPhoto.center.y + translation.y;
         
         topPhoto.center = CGPointMake(xPos, yPos);
         [gesture setTranslation:CGPointMake(0, 0) inView:self.contentView];
@@ -358,15 +358,15 @@
         return;
     }
     
-    int numberOfPhotos = [self.dataSource numberOfPhotosInPhotoStackView:self];
-    int topPhotoIndex  = [self indexOfTopPhoto]; // Keeping track of current photo's top index so that it remains on top if new photos are added
+    NSInteger numberOfPhotos = [self.dataSource numberOfPhotosInPhotoStackView:self];
+    NSInteger topPhotoIndex  = [self indexOfTopPhoto]; // Keeping track of current photo's top index so that it remains on top if new photos are added
     
     if(numberOfPhotos > 0) {
 
         NSMutableArray *photoViewsMutable   = [[NSMutableArray alloc] initWithCapacity:numberOfPhotos];
         UIImage *borderImage                = [self.borderImage resizableImageWithCapInsets:UIEdgeInsetsMake(self.borderWidth, self.borderWidth, self.borderWidth, self.borderWidth)];
         
-        for (int index = 0; index < numberOfPhotos; index++) {
+        for (NSUInteger index = 0; index < numberOfPhotos; index++) {
 
             UIImage *image = [self.dataSource photoStackView:self photoForIndex:index];
             CGSize imageSize = image.size;
