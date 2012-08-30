@@ -16,12 +16,13 @@
     - (NSUInteger)numberOfPhotosInPhotoStackView:(PhotoStackView *)photoStack;
     - (UIImage *)photoStackView:(PhotoStackView *)photoStack photoForIndex:(NSUInteger)index;
 
+    @optional
+    - (CGSize)photoStackView:(PhotoStackView *)photoStack photoSizeForIndex:(NSUInteger)index;
+
 @end
 
 
 @protocol PhotoStackViewDelegate <NSObject>
-
-    @required
 
     @optional
     -(void)photoStackView:(PhotoStackView *)photoStackView willStartMovingPhotoAtIndex:(NSUInteger)index;

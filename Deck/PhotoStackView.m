@@ -368,7 +368,13 @@
         
         for (int index = 0; index < numberOfPhotos; index++) {
 
-            UIImageView *photoImageView     = [[UIImageView alloc] initWithImage:[self.dataSource photoStackView:self photoForIndex:index]];
+            UIImage *image = [self.dataSource photoStackView:self photoForIndex:index];
+            CGSize imageSize = image.size;
+            if([self.dataSource respondsToSelector:@selector(photoStackView:photoSizeForIndex:)]){
+                imageSize = [self.dataSource photoStackView:self photoSizeForIndex:index];
+            }
+            UIImageView *photoImageView     = [[UIImageView alloc] initWithFrame:(CGRect){CGPointZero, imageSize}];
+            photoImageView.image            = image;
             UIView *view                    = [[UIView alloc] initWithFrame:photoImageView.frame];
             view.layer.rasterizationScale   = [[UIScreen mainScreen] scale];            
             view.layer.shouldRasterize      = YES; // rasterize the view for faster drawing and smooth edges
