@@ -16,17 +16,6 @@
 
 @interface PhotoStackView()
 
-    -(UIView *)topPhoto;
-    -(NSUInteger)indexOfTopPhoto;
-    -(void)setup;
-    -(void)photoPanned:(UIPanGestureRecognizer *)gesture;
-    -(void)photoTapped:(UITapGestureRecognizer *)gesture;
-    -(void)returnToCenter:(UIView *)photo;
-    -(void)flickAway:(UIView *)photo withVelocity:(CGPoint)velocity;
-    -(void)makeCrooked:(UIView *)photo animated:(BOOL)animated;
-    -(void)makeStraight:(UIView *)photo animated:(BOOL)animated;
-    -(void)rotatePhoto:(UIView *)photo degrees:(NSInteger)degrees animated:(BOOL)animated;
-
     @property (nonatomic, strong) UIView *contentView;
     @property (nonatomic, strong) NSArray *photoViews;
 
@@ -34,16 +23,8 @@
 
 @implementation PhotoStackView
 
-@synthesize photoViews = _photoViews,
-            showBorder = _showBorder,
-            rotationOffset = _rotationOffset, 
-            borderWidth = _borderWidth, 
-            borderImage = _borderImage,
-            delegate = _delegate,
-            highlightColor = _highlightColor,
-            contentView = _contentView;
-
-
+@synthesize borderImage = _borderImage;
+@synthesize borderWidth = _borderWidth;
 
 #pragma mark -
 #pragma mark Getters and Setters
@@ -109,10 +90,6 @@
     }
 }
 
--(BOOL)showBorder {
-    return _showBorder;
-}
-
 -(void)setShowBorder:(BOOL)showBorder {
     if(showBorder != _showBorder) {
         _showBorder = showBorder;
@@ -129,10 +106,6 @@
         _borderWidth = borderWidth;
         [self reloadData];
     }
-}
-
--(CGFloat)rotationOffset {
-    return _rotationOffset;
 }
 
 -(void)setRotationOffset:(CGFloat)rotationOffset {
