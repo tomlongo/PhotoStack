@@ -15,7 +15,6 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
 
 @interface PhotoStackView()
 
-    @property (nonatomic, strong) UIView *contentView;
     @property (nonatomic, strong) NSArray *photoViews;
 
 @end
@@ -57,21 +56,11 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
             [self makeCrooked:view animated:NO];
         }
         
-        [self.contentView addSubview:view];
-        [self.contentView sendSubviewToBack:view];
+        [self insertSubview:view atIndex:0];
         
     }
     
     _photoViews = photoViews;
-}
-
--(UIView *)contentView {
-    
-    if(!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:self.bounds];
-    }
-    
-    return _contentView;
 }
 
 -(UIImage *)borderImage {
@@ -147,7 +136,7 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
     
     [UIView animateWithDuration:0.2
                      animations:^{
-                         photo.center = CGPointMake(self.contentView.center.x, self.contentView.center.y);
+                         photo.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
                      }];
 }
 
@@ -162,17 +151,18 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
         }
         [self.delegate photoStackView:self willFlickAwayPhotoFromIndex:fromIndex toIndex:toIndex];
     }
-    
-    CGFloat xPos = (velocity.x < 0) ? self.contentView.center.x-self.contentView.frame.size.width : self.contentView.center.y+self.contentView.frame.size.width;
+
+    CGFloat width = CGRectGetWidth(self.bounds);
+    CGFloat xPos = (velocity.x < 0) ? CGRectGetMidX(self.bounds)-width : CGRectGetMidY(self.bounds)+width;
     
     [UIView animateWithDuration:0.1
                      animations:^{
-                         photo.center = CGPointMake(xPos, self.contentView.center.y);
+                         photo.center = CGPointMake(xPos, CGRectGetMidY(self.bounds));
                      }
                      completion:^(BOOL finished){
                          
                          [self makeCrooked:photo animated:YES];
-                         [self.contentView sendSubviewToBack:photo];
+                         [self sendSubviewToBack:photo];
                          [self makeStraight:[self topPhoto] animated:YES];
                          [self returnToCenter:photo];
                          
@@ -224,8 +214,8 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
 -(void)photoPanned:(UIPanGestureRecognizer *)gesture {
     
     UIView *topPhoto = [self topPhoto];
-    CGPoint velocity = [gesture velocityInView:self.contentView];
-    CGPoint translation = [gesture translationInView:self.contentView];
+    CGPoint velocity = [gesture velocityInView:self];
+    CGPoint translation = [gesture translationInView:self];
     
     if(gesture.state == UIGestureRecognizerStateBegan) {
         
@@ -243,7 +233,7 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
         CGFloat yPos = topPhoto.center.y + translation.y;
         
         topPhoto.center = CGPointMake(xPos, yPos);
-        [gesture setTranslation:CGPointMake(0, 0) inView:self.contentView];
+        [gesture setTranslation:CGPointMake(0, 0) inView:self];
         
         
     } else if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
@@ -298,7 +288,7 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
 -(void)goToPhotoAtIndex:(NSUInteger)index {
     for (UIView *view in self.photoViews) {
         if([self.photoViews indexOfObject:view] < index) {
-            [self.contentView sendSubviewToBack:view];
+            [self sendSubviewToBack:view];
         }
     }
     [self makeStraight:[self topPhoto] animated:NO];
@@ -309,7 +299,7 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
 }
 
 -(UIView *)topPhoto {
-    return [self.contentView.subviews objectAtIndex:[self.contentView.subviews count]-1];
+    return [self.subviews objectAtIndex:[self.subviews count]-1];
 }
 
 -(void)sendActionsForControlEvents:(UIControlEvents)controlEvents {
@@ -378,12 +368,12 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
             [view addSubview:photoImageView];
 
             view.tag    = index;
-            view.center = self.contentView.center;
-            
+            view.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+
             [photoViewsMutable addObject:view];
             
         }
-        
+
         // Photo views are added to subview in the photoView setter
         self.photoViews = photoViewsMutable; photoViewsMutable = nil;
         [self goToPhotoAtIndex:topPhotoIndex];
@@ -403,15 +393,14 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(photoPanned:)];
     [panGesture setMaximumNumberOfTouches:1];
     panGesture.delegate = self;
-    [self.contentView addGestureRecognizer:panGesture];
+    [self addGestureRecognizer:panGesture];
     
     // Add Tap Gesture
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
     [tapGesture setNumberOfTapsRequired:1];
     tapGesture.delegate = self;
-    [self.contentView addGestureRecognizer:tapGesture];
-    
-    [self addSubview:self.contentView];
+    [self addGestureRecognizer:tapGesture];
+
     [self reloadData];
 }
 
@@ -433,7 +422,6 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
     [self setPhotoViews:nil];
     [self setBorderImage:nil];
     [self setHighlightColor:nil];
-    [self setContentView:nil];
 }
 
 @end
