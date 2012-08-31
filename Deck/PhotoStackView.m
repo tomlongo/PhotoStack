@@ -6,43 +6,23 @@
 //  - GitHub:  github.com/tomlongo
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "PhotoStackView.h"
 
-#define degreesToRadians(x) (M_PI * x / 180.0)
-#define BorderVisibilityDefault YES
-#define BorderWidthDefault 5.0f
-#define PhotoRotationOffsetDefault 4.0f
+static BOOL const BorderVisibilityDefault = YES;
+static CGFloat const BorderWidthDefault = 5.0f;
+static CGFloat const PhotoRotationOffsetDefault = 4.0f;
 
 @interface PhotoStackView()
 
-    -(UIView *)topPhoto;
-    -(NSUInteger)indexOfTopPhoto;
-    -(void)setup;
-    -(void)photoPanned:(UIPanGestureRecognizer *)gesture;
-    -(void)photoTapped:(UITapGestureRecognizer *)gesture;
-    -(void)returnToCenter:(UIView *)photo;
-    -(void)flickAway:(UIView *)photo withVelocity:(CGPoint)velocity;
-    -(void)makeCrooked:(UIView *)photo animated:(BOOL)animated;
-    -(void)makeStraight:(UIView *)photo animated:(BOOL)animated;
-    -(void)rotatePhoto:(UIView *)photo degrees:(int)degrees animated:(BOOL)animated;
-
-    @property (nonatomic, strong) UIView *contentView;
     @property (nonatomic, strong) NSArray *photoViews;
 
 @end
 
 @implementation PhotoStackView
 
-@synthesize photoViews = _photoViews,
-            showBorder = _showBorder,
-            rotationOffset = _rotationOffset, 
-            borderWidth = _borderWidth, 
-            borderImage = _borderImage,
-            delegate = _delegate,
-            highlightColor = _highlightColor,
-            contentView = _contentView;
-
-
+@synthesize borderImage = _borderImage;
+@synthesize borderWidth = _borderWidth;
 
 #pragma mark -
 #pragma mark Getters and Setters
@@ -76,21 +56,11 @@
             [self makeCrooked:view animated:NO];
         }
         
-        [self.contentView addSubview:view];
-        [self.contentView sendSubviewToBack:view];
+        [self insertSubview:view atIndex:0];
         
     }
     
     _photoViews = photoViews;
-}
-
--(UIView *)contentView {
-    
-    if(!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:self.bounds];
-    }
-    
-    return _contentView;
 }
 
 -(UIImage *)borderImage {
@@ -108,10 +78,6 @@
     }
 }
 
--(BOOL)showBorder {
-    return _showBorder;
-}
-
 -(void)setShowBorder:(BOOL)showBorder {
     if(showBorder != _showBorder) {
         _showBorder = showBorder;
@@ -119,22 +85,18 @@
     }
 }
 
--(float)borderWidth {
+-(CGFloat)borderWidth {
     return (self.showBorder) ? _borderWidth : 0;
 }
 
--(void)setBorderWidth:(float)borderWidth {
+-(void)setBorderWidth:(CGFloat)borderWidth {
     if(borderWidth != _borderWidth) {
         _borderWidth = borderWidth;
         [self reloadData];
     }
 }
 
--(float)rotationOffset {
-    return _rotationOffset;
-}
-
--(void)setRotationOffset:(float)rotationOffset {
+-(void)setRotationOffset:(CGFloat)rotationOffset {
     if(rotationOffset != _rotationOffset) {
         _rotationOffset = rotationOffset;
         [self reloadData];
@@ -173,34 +135,34 @@
 -(void)returnToCenter:(UIView *)photo {
     
     [UIView animateWithDuration:0.2
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         photo.center = CGPointMake(self.contentView.center.x, self.contentView.center.y);
-                     }
-                     completion:^(BOOL finished){
-                         //Card did return to centre
+                         photo.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
                      }];
 }
 
 -(void)flickAway:(UIView *)photo withVelocity:(CGPoint)velocity {
     
-    if ([self.delegate respondsToSelector:@selector(photoStackView:willFlickAwayPhotoAtIndex:)]) {
-        [self.delegate photoStackView:self willFlickAwayPhotoAtIndex:[self indexOfTopPhoto]];
+    if ([self.delegate respondsToSelector:@selector(photoStackView:willFlickAwayPhotoFromIndex:toIndex:)]) {
+        NSUInteger fromIndex = [self indexOfTopPhoto];
+        NSUInteger toIndex = [self indexOfTopPhoto]+1;
+        NSUInteger numberOfPhotos = [self.dataSource numberOfPhotosInPhotoStackView:self];
+        if (toIndex >= numberOfPhotos) {
+            toIndex = 0;
+        }
+        [self.delegate photoStackView:self willFlickAwayPhotoFromIndex:fromIndex toIndex:toIndex];
     }
-    
-    float xPos = (velocity.x < 0) ? self.contentView.center.x-self.contentView.frame.size.width : self.contentView.center.y+self.contentView.frame.size.width;
+
+    CGFloat width = CGRectGetWidth(self.bounds);
+    CGFloat xPos = (velocity.x < 0) ? CGRectGetMidX(self.bounds)-width : CGRectGetMidY(self.bounds)+width;
     
     [UIView animateWithDuration:0.1
-                          delay: 0.0
-                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         photo.center = CGPointMake(xPos, self.contentView.center.y);
+                         photo.center = CGPointMake(xPos, CGRectGetMidY(self.bounds));
                      }
                      completion:^(BOOL finished){
                          
                          [self makeCrooked:photo animated:YES];
-                         [self.contentView sendSubviewToBack:photo];
+                         [self sendSubviewToBack:photo];
                          [self makeStraight:[self topPhoto] animated:YES];
                          [self returnToCenter:photo];
                          
@@ -211,24 +173,19 @@
     
 }
 
--(void)rotatePhoto:(UIView *)photo degrees:(int)degrees animated:(BOOL)animated {
+-(void)rotatePhoto:(UIView *)photo degrees:(NSInteger)degrees animated:(BOOL)animated {
     
-    float radians = degreesToRadians(degrees);
+    CGFloat radians = M_PI * degrees / 180.0;
     
     CGAffineTransform transform = CGAffineTransformMakeRotation(radians);
-    
+
     if(animated) {
-        
+
         [UIView animateWithDuration:0.2
-                              delay: 0.0
-                            options: UIViewAnimationOptionCurveEaseInOut
                          animations:^{
                              photo.transform = transform;
-                         }
-                         completion:^(BOOL finished){
-                             //done
                          }];
-        
+
     } else {
         photo.transform = transform;
     }
@@ -237,10 +194,10 @@
 
 -(void)makeCrooked:(UIView *)photo animated:(BOOL)animated {
     
-    int min = -(self.rotationOffset);
-    int max = self.rotationOffset;  
+    NSInteger min = -(self.rotationOffset);
+    NSInteger max = self.rotationOffset;
     
-    int degrees = (arc4random() % (max-min+1)) + min;
+    NSInteger degrees = (arc4random_uniform(max-min+1)) + min;
     [self rotatePhoto:photo degrees:degrees animated:animated];
     
 }
@@ -257,8 +214,8 @@
 -(void)photoPanned:(UIPanGestureRecognizer *)gesture {
     
     UIView *topPhoto = [self topPhoto];
-    CGPoint velocity = [gesture velocityInView:self.contentView];
-    CGPoint translation = [gesture translationInView:self.contentView];
+    CGPoint velocity = [gesture velocityInView:self];
+    CGPoint translation = [gesture translationInView:self];
     
     if(gesture.state == UIGestureRecognizerStateBegan) {
         
@@ -272,11 +229,11 @@
     
     if(gesture.state == UIGestureRecognizerStateChanged) {
         
-        float xPos = topPhoto.center.x + translation.x;
-        float yPos = topPhoto.center.y + translation.y;
+        CGFloat xPos = topPhoto.center.x + translation.x;
+        CGFloat yPos = topPhoto.center.y + translation.y;
         
         topPhoto.center = CGPointMake(xPos, yPos);
-        [gesture setTranslation:CGPointMake(0, 0) inView:self.contentView];
+        [gesture setTranslation:CGPointMake(0, 0) inView:self];
         
         
     } else if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
@@ -324,10 +281,14 @@
 #pragma mark -
 #pragma mark Other Methods
 
+-(void)flipToNextPhoto{
+    [self flickAway:[self topPhoto] withVelocity:CGPointMake(-400, 0)];
+}
+
 -(void)goToPhotoAtIndex:(NSUInteger)index {
     for (UIView *view in self.photoViews) {
         if([self.photoViews indexOfObject:view] < index) {
-            [self.contentView sendSubviewToBack:view];
+            [self sendSubviewToBack:view];
         }
     }
     [self makeStraight:[self topPhoto] animated:NO];
@@ -338,7 +299,7 @@
 }
 
 -(UIView *)topPhoto {
-    return [self.contentView.subviews objectAtIndex:[self.contentView.subviews count]-1];
+    return [self.subviews objectAtIndex:[self.subviews count]-1];
 }
 
 -(void)sendActionsForControlEvents:(UIControlEvents)controlEvents {
@@ -359,46 +320,60 @@
         return;
     }
     
-    int numberOfPhotos = [self.dataSource numberOfPhotosInPhotoStackView:self];
-    int topPhotoIndex  = [self indexOfTopPhoto]; // Keeping track of current photo's top index so that it remains on top if new photos are added
+    NSInteger numberOfPhotos = [self.dataSource numberOfPhotosInPhotoStackView:self];
+    NSInteger topPhotoIndex  = [self indexOfTopPhoto]; // Keeping track of current photo's top index so that it remains on top if new photos are added
     
     if(numberOfPhotos > 0) {
 
         NSMutableArray *photoViewsMutable   = [[NSMutableArray alloc] initWithCapacity:numberOfPhotos];
         UIImage *borderImage                = [self.borderImage resizableImageWithCapInsets:UIEdgeInsetsMake(self.borderWidth, self.borderWidth, self.borderWidth, self.borderWidth)];
         
-        for (int index = 0; index < numberOfPhotos; index++) {
+        for (NSUInteger index = 0; index < numberOfPhotos; index++) {
 
-            UIImageView *photoImageView     = [[UIImageView alloc] initWithImage:[self.dataSource photoStackView:self photoForIndex:index]];
+            UIImage *image = [self.dataSource photoStackView:self photoForIndex:index];
+            CGSize imageSize = image.size;
+            if([self.dataSource respondsToSelector:@selector(photoStackView:photoSizeForIndex:)]){
+                imageSize = [self.dataSource photoStackView:self photoSizeForIndex:index];
+            }
+            UIImageView *photoImageView     = [[UIImageView alloc] initWithFrame:(CGRect){CGPointZero, imageSize}];
+            photoImageView.image            = image;
             UIView *view                    = [[UIView alloc] initWithFrame:photoImageView.frame];
-            
-            if(self.showBorder) {
-                
-                // If there is a border, we need to add a background image view, and add some padding around the photo for the border
-                
-                CGRect photoFrame                = photoImageView.frame;
-                photoFrame.origin                = CGPointMake(self.borderWidth, self.borderWidth);
-                photoImageView.frame             = photoFrame;
+            view.layer.rasterizationScale   = [[UIScreen mainScreen] scale];            
+            view.layer.shouldRasterize      = YES; // rasterize the view for faster drawing and smooth edges
+
+            if (self.showBorder) {
                 
                 // Add the background image
-                
-                view.frame                       = CGRectMake(0, 0, photoImageView.frame.size.width+(self.borderWidth*2), photoImageView.frame.size.height+(self.borderWidth*2));
-                UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:view.frame];
-                backgroundImageView.image        = borderImage;
-                
-                [view addSubview:backgroundImageView];
-                
+                if (borderImage) {
+                    // If there is a border image, we need to add a background image view, and add some padding around the photo for the border
+
+                    CGRect photoFrame                = photoImageView.frame;
+                    photoFrame.origin                = CGPointMake(self.borderWidth, self.borderWidth);
+                    photoImageView.frame             = photoFrame;
+
+                    view.frame                       = CGRectMake(0, 0, photoImageView.frame.size.width+(self.borderWidth*2), photoImageView.frame.size.height+(self.borderWidth*2));
+                    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:view.frame];
+                    backgroundImageView.image        = borderImage;
+                    
+                    [view addSubview:backgroundImageView];
+                } else {
+                    // if there is no boarder image draw one with the CALayer
+                    view.layer.borderWidth        = self.borderWidth;
+                    view.layer.borderColor        = [[UIColor whiteColor] CGColor];
+                    view.layer.shadowOffset       = CGSizeMake(0, 0);
+                    view.layer.shadowOpacity      = 0.5;
+                }
             }
 
             [view addSubview:photoImageView];
 
             view.tag    = index;
-            view.center = self.contentView.center;
-            
+            view.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+
             [photoViewsMutable addObject:view];
             
         }
-        
+
         // Photo views are added to subview in the photoView setter
         self.photoViews = photoViewsMutable; photoViewsMutable = nil;
         [self goToPhotoAtIndex:topPhotoIndex];
@@ -418,15 +393,14 @@
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(photoPanned:)];
     [panGesture setMaximumNumberOfTouches:1];
     panGesture.delegate = self;
-    [self.contentView addGestureRecognizer:panGesture];
+    [self addGestureRecognizer:panGesture];
     
     // Add Tap Gesture
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
     [tapGesture setNumberOfTapsRequired:1];
     tapGesture.delegate = self;
-    [self.contentView addGestureRecognizer:tapGesture];
-    
-    [self addSubview:self.contentView];
+    [self addGestureRecognizer:tapGesture];
+
     [self reloadData];
 }
 
@@ -448,7 +422,6 @@
     [self setPhotoViews:nil];
     [self setBorderImage:nil];
     [self setHighlightColor:nil];
-    [self setContentView:nil];
 }
 
 @end
