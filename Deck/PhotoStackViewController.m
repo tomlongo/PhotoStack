@@ -71,7 +71,7 @@
     // User started moving a photo
 }
 
--(void)photoStackView:(PhotoStackView *)photoStackView willFlickAwayPhotoAtIndex:(NSUInteger)index {
+-(void)photoStackView:(PhotoStackView *)photoStackView willFlickAwayPhotoFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     // User flicked the photo away, revealing the next one in the stack
 }
 
