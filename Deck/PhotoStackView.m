@@ -294,6 +294,12 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
     [self makeStraight:[self topPhoto] animated:NO];
 }
 
+-(void)hidePhotoAtIndex:(NSUInteger)index {
+    if(index < [self.photoViews count]) {
+        [[self.photoViews objectAtIndex:index] removeFromSuperview];
+    }
+}
+
 -(NSUInteger)indexOfTopPhoto {
     return (self.photoViews) ? [self.photoViews indexOfObject:[self topPhoto]] : 0;
 }
