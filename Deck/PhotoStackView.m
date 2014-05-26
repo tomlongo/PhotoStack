@@ -305,6 +305,8 @@ static CGFloat const PhotoRotationOffsetDefault = 4.0f;
 }
 
 -(UIView *)topPhoto {
+    if(self.subviews.count == 0)
+        return nil;
     return [self.subviews objectAtIndex:[self.subviews count]-1];
 }
 
